@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+}
+
+.traduccion{
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: 50%;
+}
+#texto{
+    height: 20rem;
+}
+
+.resultado{
+    background-color: red;
+    width: 50%;
+}
+.space{
+    margin: 2rem;
+}
+
+img{
+    height: 60px;
+    width: 40px;
+}
