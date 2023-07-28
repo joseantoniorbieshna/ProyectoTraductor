@@ -7,17 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <head></head>
-    <main>
-        <div class="traduccion">
-            <input type="text" id="texto">
-            <input type="button" id="bttn_traducir" value="traducir">
-        </div>
-        <div class="resultado">
-    </main>
-    </div>
+    <header>
+        <img class="logo" src="src/logo.png" alt="logo">
+        <h1>TRADUCTOR</h1>
+    </header>
 
-    <div class="img_container"></div>
+    <main>
+        <form class="traduccion" onsubmit="event.preventDefault()">
+            <h1 class="left">Introduce un nombre a traducir:</h1>
+            <textarea class="left" type="text" id="texto" placeholder="Introduce un nombre."></textarea>
+           <!-- <input class="left" type="submit" id="bttn_traducir" value="traducir">-->
+        </form>
+        <div class="resultado">
+            <div class="big_image_container"></div>
+            <div class="img_container"></div>
+        </div>
+    </main>
+    
     <script src="./pagina.js"></script>
 </body>
 </html>

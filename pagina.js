@@ -32,19 +32,27 @@ let rutaImgLetra = {
 /*Variables*/
 let barText= document.getElementById("texto")
 let miboton= document.getElementById("bttn_traducir")
-var palabrasValidas = "abcdefghijklmnñopqrstuvwxyz ".split("")
+let letrasValidas = "abcdefghijklmnñopqrstuvwxyz ".split("")
+let myinterval=""
+let timeInterval = 1000
 
 /*Listener*/
-miboton.addEventListener("click",translateText)
+texto.addEventListener("input",translateText)
 
 /*Main*/
 function translateText(){
+    
     let texto = barText.value.toLowerCase().split("")
     console.log(proveIsValid(texto))
 
-
     isValid=proveIsValid(texto)
+
+
     createResponse(texto,isValid)
+    
+    if(isValid){
+        createIntervalBigImage(texto,0)
+    }
 
 }
 
@@ -52,7 +60,7 @@ function translateText(){
 function proveIsValid(texto){
     for (i in texto){
         console.log();
-        if(!palabrasValidas.includes(texto[i])){
+        if(!letrasValidas.includes(texto[i])){
             return false
         }
     }
@@ -60,12 +68,30 @@ function proveIsValid(texto){
 }
 
 function createResponse(texto,isValid){
-    let resultadoDIV = document.querySelector(".resultado")
+    let resultadoDIV = document.querySelector(".img_container")
     resultadoDIV.innerHTML=""
+    let idImage=0
     if(isValid){
         for(i in texto){/*Recorro por letra, la creo y la inserto*/
-            let imagen = createImgByLetter(texto[i])
-            resultadoDIV.appendChild(imagen)
+            let element=""
+            letter = texto[i]
+
+            if(texto[i]==" "){/*Si es espacio salto, si no rellenar letra*/
+                element = document.createElement("div")
+                element.className = "space"
+            }else{
+                console.log(rutaImgLetra[letter]);
+                element = document.createElement("img")
+                element.src = rutaImgLetra[letter]
+                element.id = idImage
+                idImage++
+
+                //listener
+                element.addEventListener("click",()=>{
+                    createIntervalBigImage(texto,element.id)
+                })
+            }
+            resultadoDIV.appendChild(element)
         }
     }else{
         resultadoDIV.innerHTML = "<h1>Error alguna palabra no es valida. El rango de palabra valido es de la a-z incluyendo la ñ!</h1>"
@@ -73,15 +99,31 @@ function createResponse(texto,isValid){
     }
 }
 
-function createImgByLetter(letter){
-    if(letter==' '){
-        const space = document.createElement("div")
-        space.className = "space"
-        return space
-    }else{/*Crear imagen*/
-        console.log(rutaImgLetra[letter]);
-        const img = document.createElement("img")
-        img.src = rutaImgLetra[letter]
-        return img
-    }
+
+
+
+
+/*BIG IMAGE*/
+
+function createBigImage(texto,i){
+    letter = texto[i]
+    myImg = document.createElement("img")
+    myImg.src = rutaImgLetra[letter]
+    myImg.className = "big_image"
+    document.querySelector(".big_image_container").innerHTML=""
+    document.querySelector(".big_image_container").appendChild(myImg)
+}
+
+function createIntervalBigImage(texto,i){
+    texto = texto.filter(letra=>letra!=' ') /*Quitar espacios*/
+    clearInterval(myinterval)
+
+    createBigImage(texto,i)
+
+    myinterval = setInterval(()=>{
+        i++
+        if(i>=texto.length){i=0}
+        createBigImage(texto,i)
+        console.log(texto[i]);
+    },timeInterval)
 }
