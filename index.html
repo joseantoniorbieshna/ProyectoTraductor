@@ -12,14 +12,14 @@
         <h1>TRADUCTOR</h1>
     </header>
 
+    
+    <h1 class="left_gap">Introduce un nombre a traducir:</h1>
     <main>
         <form class="traduccion" onsubmit="event.preventDefault()">
-            <h1 class="left">Introduce un nombre a traducir:</h1>
-            <textarea class="left" type="text" id="texto" placeholder="Introduce un nombre."></textarea>
-           <!-- <input class="left" type="submit" id="bttn_traducir" value="traducir">-->
+            <textarea class="left_gap" type="text" id="texto" maxlength="50" placeholder="Introduce un nombre."></textarea>
+            <!-- <input class="left" type="submit" id="bttn_traducir" value="traducir">-->
         </form>
-        <div class="resultado">
-            <div class="big_image_container"></div>
+        <div class="resultado left_gap">
             <div class="img_container"></div>
         </div>
     </main>

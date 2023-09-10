@@ -49,10 +49,6 @@ function translateText(){
 
 
     createResponse(texto,isValid)
-    
-    if(isValid){
-        createIntervalBigImage(texto,0)
-    }
 
 }
 
@@ -85,11 +81,6 @@ function createResponse(texto,isValid){
                 element.src = rutaImgLetra[letter]
                 element.id = idImage
                 idImage++
-
-                //listener
-                element.addEventListener("click",()=>{
-                    createIntervalBigImage(texto,element.id)
-                })
             }
             resultadoDIV.appendChild(element)
         }
@@ -97,33 +88,4 @@ function createResponse(texto,isValid){
         resultadoDIV.innerHTML = "<h1>Error alguna palabra no es valida. El rango de palabra valido es de la a-z incluyendo la ñ!</h1>"
         resultadoDIV.innerHTML += "<h1>Prueba Otra vez</h1>"
     }
-}
-
-
-
-
-
-/*BIG IMAGE*/
-
-function createBigImage(texto,i){
-    letter = texto[i]
-    myImg = document.createElement("img")
-    myImg.src = rutaImgLetra[letter]
-    myImg.className = "big_image"
-    document.querySelector(".big_image_container").innerHTML=""
-    document.querySelector(".big_image_container").appendChild(myImg)
-}
-
-function createIntervalBigImage(texto,i){
-    texto = texto.filter(letra=>letra!=' ') /*Quitar espacios*/
-    clearInterval(myinterval)
-
-    createBigImage(texto,i)
-
-    myinterval = setInterval(()=>{
-        i++
-        if(i>=texto.length){i=0}
-        createBigImage(texto,i)
-        console.log(texto[i]);
-    },timeInterval)
 }
